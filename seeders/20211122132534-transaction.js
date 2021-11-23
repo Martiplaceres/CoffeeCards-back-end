@@ -3,59 +3,61 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert(
-      "storeBeans",
+      "transaction",
       [
         {
-          beansId: 1,
-          storeId: 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          beansId: 1,
-          storeId: 2,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          beansId: 1,
-          storeId: 3,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          beansId: 1,
+          userId: 1,
           storeId: 4,
+          beanId: 4,
+          quantity: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          beansId: 2,
+          userId: 2,
+          storeId: 3,
+          beanId: 3,
+          quantity: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 3,
           storeId: 2,
+          beanId: 2,
+          quantity: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          beansId: 2,
-          storeId: 4,
+          userId: 4,
+          storeId: 2,
+          beanId: 1,
+          quantity: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          beansId: 3,
+          userId: 1,
           storeId: 1,
+          beanId: 4,
+          quantity: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          beansId: 3,
-          storeId: 3,
+          userId: 2,
+          storeId: 1,
+          beanId: 4,
+          quantity: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          beansId: 4,
-          storeId: 3,
+          userId: 3,
+          storeId: 4,
+          beanId: 2,
+          quantity: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -65,6 +67,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete("storeBeans", null, {});
+    await queryInterface.bulkDelete("transaction", null, {});
   },
 };

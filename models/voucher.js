@@ -1,25 +1,24 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class storeBeans extends Model {
+  class voucher extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.store), this.belongsTo(models.beans);
+      voucher.belongsTo(models.store), voucher.belongsTo(models.user);
     }
   }
-  storeBeans.init(
+  deal.init(
     {
-      beansId: DataTypes.INTEGER,
-      storeId: DataTypes.INTEGER,
+      freeCoffee: DataTypes.BOOLEAN,
     },
     {
       sequelize,
-      modelName: "storeBeans",
+      modelName: "voucher",
     }
   );
-  return storeBeans;
+  return voucher;
 };

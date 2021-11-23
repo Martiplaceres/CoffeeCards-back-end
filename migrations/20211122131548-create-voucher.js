@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("transactions", {
+    await queryInterface.createTable("voucher", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -28,11 +28,7 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       },
-      quantity: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      freeCoffee: {
+      claimed: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
@@ -47,6 +43,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("transactions");
+    await queryInterface.dropTable("voucher");
   },
 };

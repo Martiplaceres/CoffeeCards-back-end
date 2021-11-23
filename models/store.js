@@ -8,13 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      store.hasMany(models.user),
-        store.hasMany(models.transactions),
-        store.hasMany(models.stamps),
-        store.belongsToMany(models.beans, {
-          through: "storeBeans",
-          foreignKey: "storeId",
-        });
+      store.hasMany(models.transaction), store.hasMany(models.voucher);
     }
   }
   store.init(

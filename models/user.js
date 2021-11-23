@@ -2,13 +2,8 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      user.hasMany(models.stamps), user.hasMany(models.transactions);
+      user.hasMany(models.transation), user.hasMany(models.voucher);
     }
   }
   user.init(
