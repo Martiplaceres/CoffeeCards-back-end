@@ -8,14 +8,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      store.hasMany(models.transaction), store.hasMany(models.voucher);
+      store.hasMany(models.transaction);
+      store.hasMany(models.voucher);
+      store.belongsTo(models.user);
     }
   }
   store.init(
     {
       name: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
       stampLimit: DataTypes.INTEGER,
     },
     {

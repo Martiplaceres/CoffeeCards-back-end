@@ -4,7 +4,8 @@ const { toJWT } = require("../auth/jwt");
 const authMiddleware = require("../auth/middleware");
 const User = require("../models/").user;
 const { SALT_ROUNDS } = require("../config/constants");
-
+const Store = require("../models/").store;
+const Transaction = require("../models").transaction;
 const router = new Router();
 
 router.post("/login", async (req, res, next) => {
@@ -27,6 +28,22 @@ router.post("/login", async (req, res, next) => {
 
     delete user.dataValues["password"]; // don't send back the password hash
     const token = toJWT({ userId: user.id });
+
+    if (user.isStore) {
+      const store = await Store.findOne({
+        where: {
+          userId: user.id,
+        },
+        include: { model: Transaction },
+      });
+
+      if (store) {
+        return res
+          .status(200)
+          .send({ token, ...user.dataValues, store: store });
+      }
+    }
+
     return res.status(200).send({ token, ...user.dataValues });
   } catch (error) {
     console.log(error);
@@ -35,7 +52,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/signup", async (req, res) => {
-  const { email, password, name, isAnArtist } = req.body;
+  const { email, password, name, isStore, stampLimit } = req.body;
   if (!email || !password || !name) {
     return res.status(400).send("Please provide an email, password and a name");
   }
@@ -45,14 +62,29 @@ router.post("/signup", async (req, res) => {
       email,
       password: bcrypt.hashSync(password, SALT_ROUNDS),
       name,
-      isAnArtist,
+      isStore,
+      stampLimit,
     });
 
     delete newUser.dataValues["password"]; // don't send back the password hash
 
     const token = toJWT({ userId: newUser.id });
 
-    res.status(201).json({ token, ...newUser.dataValues });
+    if (isStore) {
+      const userStore = await Store.create({
+        userId: newUser.id,
+        stampLimit: newUser.stampLimit,
+      });
+      res.status(201).json({
+        token,
+        ...newUser.dataValues,
+        store: { ...userStore.dataValues },
+      });
+    }
+
+    if (!isStore) {
+      res.status(201).json({ token, ...newUser.dataValues });
+    }
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
       return res
@@ -70,6 +102,20 @@ router.post("/signup", async (req, res) => {
 router.get("/me", authMiddleware, async (req, res) => {
   // don't send back the password hash
   delete req.user.dataValues["password"];
+  const user = req.user;
+  if (user.isStore) {
+    const store = await Store.findOne({
+      where: {
+        userId: user.id,
+      },
+      include: { model: Transaction },
+    });
+    if (store) {
+      res.status(200).send({ ...req.user.dataValues, store: store });
+      return;
+    }
+  }
+
   res.status(200).send({ ...req.user.dataValues });
 });
 

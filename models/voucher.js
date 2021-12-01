@@ -8,12 +8,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      voucher.belongsTo(models.store), voucher.belongsTo(models.user);
+      voucher.belongsTo(models.store);
+      voucher.belongsTo(models.user);
     }
   }
-  deal.init(
+  voucher.init(
     {
-      freeCoffee: DataTypes.BOOLEAN,
+      claimed: DataTypes.BOOLEAN,
     },
     {
       sequelize,

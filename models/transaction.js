@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   transaction.init(
     {
-      quantity: DataTypes.STRING,
+      quantity: DataTypes.INTEGER,
     },
     {
       sequelize,
