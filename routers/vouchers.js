@@ -38,16 +38,33 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:voucherId", authMiddleware, async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { voucherId } = req.params;
+    const id = req.user.id;
+    console.log("ID", id);
 
-    const voucherToUpdate = await Voucher.findByPk(id);
-    console.log("I'm here", voucherToUpdate);
-    if (!id) {
+    const userWithStore = await User.findByPk(id, {
+      include: { model: Store },
+    });
+    console.log(" user with store", userWithStore.dataValues);
+
+    const voucherToUpdate = await Voucher.findByPk(voucherId, {
+      include: { model: Store },
+    });
+    console.log("Voucher to update", voucherToUpdate.dataValues);
+    if (!voucherToUpdate) {
       res.status(404).send("Voucher not found");
+    } else if (voucherToUpdate.claimed) {
+      res.status(404).send("Voucher is already claimed");
+    } else if (userWithStore.store.id !== voucherToUpdate.store.id) {
+      res
+        .status(403)
+        .send(`This voucher doesn't belong to ${userWithStore.store.name}`);
     } else {
-      const updatedVoucher = await voucherToUpdate.update(req.body);
+      const updatedVoucher = await voucherToUpdate.update({
+        claimed: true,
+      });
       res.json(updatedVoucher);
     }
   } catch (e) {

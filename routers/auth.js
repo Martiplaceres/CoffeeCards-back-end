@@ -63,7 +63,6 @@ router.post("/signup", async (req, res) => {
       password: bcrypt.hashSync(password, SALT_ROUNDS),
       name,
       isStore,
-      stampLimit,
     });
 
     delete newUser.dataValues["password"]; // don't send back the password hash
@@ -72,8 +71,9 @@ router.post("/signup", async (req, res) => {
 
     if (isStore) {
       const userStore = await Store.create({
+        name: newUser.name,
         userId: newUser.id,
-        stampLimit: newUser.stampLimit,
+        stampLimit: stampLimit,
       });
       res.status(201).json({
         token,
@@ -91,7 +91,7 @@ router.post("/signup", async (req, res) => {
         .status(400)
         .send({ message: "There is an existing account with this email" });
     }
-
+    console.log("error:", error);
     return res.status(400).send({ message: "Something went wrong, sorry" });
   }
 });

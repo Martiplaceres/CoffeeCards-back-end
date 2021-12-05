@@ -129,7 +129,7 @@ router.post("/", authMiddleware, async (req, res, next) => {
       });
 
       const currentVouchers = userVouchers.length;
-      const newTotalVouchers = total / stampLimit;
+      const newTotalVouchers = Math.floor(total / stampLimit);
 
       if (total > 0 && currentVouchers < newTotalVouchers) {
         const newVoucher = await Voucher.create({
