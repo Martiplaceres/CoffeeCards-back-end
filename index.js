@@ -30,7 +30,7 @@ app.use("/api/beans", beansRouter);
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + `/frontend/build/index.html`));
 });
-
-app.listen(PORT, () => {
-  console.log(`Listening on port: ${PORT}`);
+const port = process.env.PORT;
+app.listen(port, () => {
+  console.log(`Listening on port: ${port}`);
 });
