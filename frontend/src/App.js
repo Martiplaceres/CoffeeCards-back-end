@@ -7,6 +7,7 @@ import React, { PureComponent } from "react";
 import QRcodePage from "./pages/QRCodePage";
 import MyCardsPage from "./pages/MyCardsPage";
 import CardDetailsPage from "./pages/CardDetailsPage";
+import StoreStats from "./pages/storeChart";
 import ScanStampPage from "./pages/ScanStampPage";
 import ScanVoucherPage from "./pages/ScanVoucherPage";
 import { useEffect } from "react";
@@ -37,7 +38,7 @@ function App() {
         <Route path="/myvouchers" component={MyVouchers} />
         <Route path="/beans/:beanId" component={BeanDetails} />
         <Route path="/scanvoucher" component={ScanVoucherPage} />
-        <Route path="/storechart" component={PureComponent} />
+        <Route path="/storechart" component={StoreStats} />
       </Switch>
     </div>
   );

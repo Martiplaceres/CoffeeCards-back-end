@@ -7,6 +7,7 @@ const Voucher = require("../models").voucher;
 const { validateToken } = require("../qrcode");
 const authMiddleware = require("../auth/middleware");
 const _ = require("lodash");
+const moment = require("moment");
 
 const router = new Router();
 
@@ -145,6 +146,68 @@ router.post("/", authMiddleware, async (req, res, next) => {
     }
   } catch (e) {
     console.error(e);
+    next(e);
+  }
+});
+
+router.get("/stats/:storeId", async (req, res, next) => {
+  try {
+    const { storeId } = req.params;
+    const allTransactions = await Transactions.findAll({
+      where: {
+        storeId: parseInt(storeId),
+      },
+    });
+    var date = function (t) {
+      return moment(t.createdAt).format("YYYY-MM-DD");
+    };
+
+    var groupToSummary = function (group, date) {
+      return {
+        date: date,
+        transactions: group.length,
+      };
+    };
+    var transactionsGroupedByDate = _(allTransactions)
+      .groupBy(date)
+      .map(groupToSummary)
+      .value();
+
+    const allClaimedVouchers = await Voucher.findAll({
+      where: {
+        storeId: parseInt(storeId),
+        claimed: true,
+      },
+    });
+    var date = function (t) {
+      return moment(t.createdAt).format("YYYY-MM-DD");
+    };
+
+    var groupToSummaryVouchers = function (group, date) {
+      return {
+        date: date,
+        vouchers: group.length,
+      };
+    };
+    var vouchersGroupedByDate = _(allClaimedVouchers)
+      .groupBy(date)
+      .map(groupToSummaryVouchers)
+      .value();
+
+    let result = transactionsGroupedByDate.map((t) => {
+      const vouchers =
+        vouchersGroupedByDate.find((v) => v.date === t.date) || 0;
+      const vouchersCount = vouchers ? vouchers.vouchers : 0;
+      return {
+        date: t.date,
+        transactions: t.transactions,
+        vouchers: vouchersCount,
+      };
+    });
+
+    return res.send(result);
+  } catch (e) {
+    console.log(e);
     next(e);
   }
 });
