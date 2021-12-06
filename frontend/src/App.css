@@ -1,12 +1,41 @@
-.App {
+/* .App {
   text-align: center;
-  background-color: rgb(255, 248, 236);
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+} */
+.backgroundImage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  background-image: url("/src/background.png");
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(0px);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  background-color: black;
+  filter: brightness(35%);
+  animation: fadein 2s;
 }
 
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -51,12 +80,6 @@
 .animation {
   animation: mymove 2s;
 }
-.welcome {
-  animation: mymove 2.5s;
-}
-button {
-  color: red;
-}
 
 button:hover {
   box-shadow: 0 0 10px rgb(121, 55, 1);
@@ -74,10 +97,13 @@ button:hover {
   }
 }
 
-html {
-  background-color: rgb(255, 248, 236);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.title {
+  font-family: "Montserrat extra-bold", sans-serif;
+  text-align: center;
+
+  vertical-align: middle;
+}
+
+.BeTitle {
+  font-family: "Montserrat", sans-serif;
 }

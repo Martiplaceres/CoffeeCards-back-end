@@ -7,7 +7,6 @@ import { selectToken, selectUser } from "../../store/user/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
-import CoffeCup from "../CoffeCup";
 import "../../App.css";
 
 export default function Navigation() {
@@ -31,9 +30,7 @@ export default function Navigation() {
         as={NavLink}
         to="/"
       >
-        CoffeeCard
-        <span style={{ margin: "0 4px" }}> </span>
-        <CoffeCup style={{ color: "white" }} />
+        <img src="GoLoyal.png" alt="" style={{ width: 220 }} />
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
