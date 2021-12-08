@@ -200,8 +200,8 @@ router.get("/stats/:storeId", async (req, res, next) => {
       const vouchersCount = vouchers ? vouchers.vouchers : 0;
       return {
         date: t.date,
-        transactions: t.transactions,
-        vouchers: vouchersCount,
+        sold: t.transactions,
+        free: vouchersCount,
       };
     });
 
