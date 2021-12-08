@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import "../App.css";
 import QRCode from "react-qr-code";
 import { Modal, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export default function MyVouchers() {
   const [myVouchers, setMyVouchers] = useState([]);
@@ -29,61 +30,77 @@ export default function MyVouchers() {
   }, []);
 
   return (
-    <div
-      className="animation"
-      style={{
-        textAlign: "center",
-        marginTop: 50,
-      }}
-    >
-      <h1
+    <div>
+      <body className="backgroundPages"> </body>
+      <div
+        className="animation"
         style={{
-          fontSize: 25,
-          fontFamily: "lobster",
+          textAlign: "center",
         }}
       >
-        {user.name}, time for free coffee!
-      </h1>
+        <h1 className="vouchersCardTitle">
+          {user.name}, is time for <span className="boldTitle">free</span>{" "}
+          coffee!
+        </h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {!Array.isArray(myVouchers)
+            ? `You have no vouchers yet.`
+            : myVouchers.map((voucher) => {
+                return (
+                  <div key={voucher.id} style={{ marginTop: 20 }}>
+                    <Card className="card" style={{ width: "18rem" }}>
+                      <Card.Body>
+                        <Card.Title>{voucher.store.name}</Card.Title>
+                        <div style={{ display: "flex", justifyContent: "row" }}>
+                          <div>
+                            <Button
+                              variant="dark"
+                              onClick={() => {
+                                const baseUrl = window.location.origin;
+                                const url = `${baseUrl}/scanvoucher?id=${voucher.id}&storeId=${voucher.storeId}`;
+                                console.log(url);
+                                setQrCodeValue(url);
+                              }}
+                            >
+                              Tap to use
+                            </Button>
 
-      {!Array.isArray(myVouchers)
-        ? `You have no vouchers yet.`
-        : myVouchers.map((voucher) => {
-            return (
-              <div key={voucher.id}>
-                <Button
-                  variant="primary"
-                  onClick={() => {
-                    const baseUrl = window.location.origin;
-                    const url = `${baseUrl}/scanvoucher?id=${voucher.id}&storeId=${voucher.storeId}`;
-                    console.log(url);
-                    setQrCodeValue(url);
-                  }}
-                >
-                  {voucher.store.name}
-                </Button>
-
-                <Modal
-                  show={qrCodeValue != null}
-                  onHide={() => setQrCodeValue(null)}
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title>Show QR code to use voucher</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    {qrCodeValue && <QRCode value={qrCodeValue} />}
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <Button
-                      variant="secondary"
-                      onClick={() => setQrCodeValue(null)}
-                    >
-                      Close
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              </div>
-            );
-          })}
+                            <Modal
+                              show={qrCodeValue != null}
+                              onHide={() => setQrCodeValue(null)}
+                            >
+                              <Modal.Header closeButton>
+                                <Modal.Title>
+                                  Show QR code to use voucher
+                                </Modal.Title>
+                              </Modal.Header>
+                              <Modal.Body>
+                                {qrCodeValue && <QRCode value={qrCodeValue} />}
+                              </Modal.Body>
+                              <Modal.Footer>
+                                <Button
+                                  variant="secondary"
+                                  onClick={() => setQrCodeValue(null)}
+                                >
+                                  Close
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
+                          </div>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </div>
+                );
+              })}
+        </div>
+      </div>
     </div>
   );
 }

@@ -30,64 +30,51 @@ export default function QRCodePage() {
   }
 
   return (
-    <div className="animation" style={{ textAlign: "center", marginTop: 60 }}>
-      <h1
-        style={{
-          fontSize: 35,
-          fontFamily: "lobster",
-        }}
-      >
-        Generate QR code:
-      </h1>
-      <div
-        style={{
-          justifyContent: "center",
-          marginTop: 40,
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignSelf: "stretch",
-        }}
-      >
-        <label for="beans">Coffee bean:</label>
-        <select
-          style={{ width: "50%" }}
-          value={bean}
-          onChange={(e) => setBean(e.target.value)}
-          name="beans"
-          id="beans"
-          form="beanform"
-        >
-          <option value="1">Brazil</option>
-          <option value="2">Peru</option>
-          <option value="3">Costa Rica</option>
-          <option value="4">Uganda</option>
-          <option value="5">Colombia</option>
-        </select>
+    <div>
+      <div className="backgroundPages"></div>
+      <div className="animation">
+        <h1 className="vouchersCardTitle">Generate QR code:</h1>
+        <div className="QRform">
+          <label for="beans">Coffee bean:</label>
+          <select
+            style={{ width: "50%" }}
+            value={bean}
+            onChange={(e) => setBean(e.target.value)}
+            name="beans"
+            id="beans"
+            form="beanform"
+          >
+            <option value="1">Brazil</option>
+            <option value="2">Peru</option>
+            <option value="3">Costa Rica</option>
+            <option value="4">Uganda</option>
+            <option value="5">Colombia</option>
+          </select>
 
-        <label for="quantity">Quantity (between 1 and 5):</label>
-        <input
-          style={{ width: "50%" }}
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-          type="number"
-          id="quantity"
-          name="quantity"
-          min="1"
-          max="5"
-        ></input>
+          <label for="quantity">Quantity (between 1 and 5):</label>
+          <input
+            style={{ width: "50%" }}
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="1"
+            max="5"
+          ></input>
 
-        <button
-          style={{ marginTop: 20 }}
-          type="button"
-          class="btn btn-dark"
-          onClick={onSubmitForm}
-        >
-          Generate QR code
-        </button>
-        <div>
-          <div style={{ marginTop: 50 }}>
-            {qrCodeValue && <QRCode value={qrCodeValue} />}
+          <button
+            style={{ marginTop: 20 }}
+            type="button"
+            class="btn btn-dark"
+            onClick={onSubmitForm}
+          >
+            Generate QR code
+          </button>
+          <div>
+            <div style={{ marginTop: 50 }}>
+              {qrCodeValue && <QRCode value={qrCodeValue} />}
+            </div>
           </div>
         </div>
       </div>

@@ -38,27 +38,37 @@ export default function StoreStats() {
 
   return (
     <div>
-      <h1>hello from store stats</h1>
-
-      <BarChart
-        width={500}
-        height={300}
-        data={myStats}
-        margin={{
-          top: 20,
-          right: 30,
-          left: 20,
-          bottom: 5,
+      <div className="backgroundPages"></div>
+      <div
+        style={{
+          padding: 60,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="transactions" stackId="a" fill="#8884d8" />
-        <Bar dataKey="vouchers" stackId="a" fill="#82ca9d" />
-      </BarChart>
+        <h1 className="vouchersCardTitle">Your sales per day:</h1>
+
+        <BarChart
+          width={500}
+          height={300}
+          data={myStats}
+          margin={{
+            top: 20,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+          style={{
+            backgroundColor: "#eee7e1",
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="sold" stackId="a" fill="#8884d8" />
+          <Bar dataKey="free" stackId="a" fill="#82ca9d" />
+        </BarChart>
+      </div>
     </div>
   );
 }

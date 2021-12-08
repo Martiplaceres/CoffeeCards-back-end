@@ -9,7 +9,6 @@ export default function MyCardsPage() {
   const [myStampCards, setMyStampCards] = useState([]);
   const token = useSelector(selectToken);
   const userId = localStorage.getItem("id");
-  // console.log("user id", userId);
 
   useEffect(() => {
     (async () => {
@@ -26,55 +25,44 @@ export default function MyCardsPage() {
   }, []);
 
   return (
-    <div
-      className="animation"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        textAlign: "center",
-        marginTop: 50,
-      }}
-    >
-      <h1
-        style={{
-          fontSize: 30,
-          fontFamily: "lobster",
-        }}
-      >
-        {" "}
-        Your active stamp cards:{" "}
-      </h1>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        {!myStampCards
-          ? "Loading"
-          : myStampCards.map((stampCard) => {
-              return stampCard.stamps > 0 ? (
-                <div key={stampCard.id} style={{ marginTop: 20 }}>
-                  <Card className="card" style={{ width: "18rem" }}>
-                    <Card.Body>
-                      <Card.Title>{stampCard.store_name}</Card.Title>
-                      <div style={{ display: "flex", justifyContent: "row" }}>
-                        {[...Array(stampCard.stamps)].map((e, i) => (
-                          <div>
-                            <CoffeeCup />
-                            <p></p>
-                          </div>
-                        ))}
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </div>
-              ) : (
-                <div></div>
-              );
-            })}
+    <div>
+      <div className="backgroundPages"></div>
+      <div className="animation">
+        <h1 className="vouchersCardTitle">
+          {" "}
+          Your <span className="boldTitle">active</span> stamp cards:{" "}
+        </h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {!myStampCards
+            ? "Loading"
+            : myStampCards.map((stampCard) => {
+                return stampCard.stamps > 0 ? (
+                  <div key={stampCard.id} style={{ marginTop: 20 }}>
+                    <Card className="card" style={{ width: "18rem" }}>
+                      <Card.Body>
+                        <Card.Title>{stampCard.store_name}</Card.Title>
+                        <div style={{ display: "flex", justifyContent: "row" }}>
+                          {[...Array(stampCard.stamps)].map((e, i) => (
+                            <div>
+                              <CoffeeCup />
+                              <p></p>
+                            </div>
+                          ))}
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </div>
+                ) : (
+                  <div></div>
+                );
+              })}
+        </div>
       </div>
     </div>
   );

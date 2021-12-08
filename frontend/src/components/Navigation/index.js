@@ -23,7 +23,6 @@ export default function Navigation() {
           fontSize: 25,
           fontFamily: "Lobster",
           fontStyle: "bold",
-
           display: "flex",
           marginRight: "50px",
         }}
@@ -44,7 +43,7 @@ export default function Navigation() {
           {user.isStore === false && (
             <NavbarItem path="/myvouchers" linkText="My vouchers" />
           )}
-          {user.isStore && <NavbarItem path="storechart" linkText="my sales" />}
+          {user.isStore && <NavbarItem path="storechart" linkText="My sales" />}
 
           {loginLogoutControls}
         </Nav>

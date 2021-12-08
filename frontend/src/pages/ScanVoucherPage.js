@@ -45,21 +45,24 @@ export default function ScanVoucherPage() {
 
   return (
     <div>
-      {errorMessage === null && claimedVoucher !== null ? (
-        <div style={{ marginTop: 20 }}>
-          <Card className="card" style={{ width: "18rem" }}>
-            <Card.Body>
-              <Card.Title>
-                Valid for a free coffee at {claimedVoucher.store.name}
-              </Card.Title>
+      <div className="backgroundPages"></div>
+      <div className="animation">
+        {errorMessage === null && claimedVoucher !== null ? (
+          <div style={{ marginTop: 20 }}>
+            <Card className="card" style={{ width: "18rem" }}>
+              <Card.Body>
+                <Card.Title>
+                  Valid for a free coffee at {claimedVoucher.store.name}
+                </Card.Title>
 
-              <CoffeeCup />
-            </Card.Body>
-          </Card>
-        </div>
-      ) : (
-        <h2>{errorMessage}</h2>
-      )}
+                <CoffeeCup />
+              </Card.Body>
+            </Card>
+          </div>
+        ) : (
+          <h2>{errorMessage}</h2>
+        )}
+      </div>
     </div>
   );
 }

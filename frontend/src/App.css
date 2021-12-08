@@ -1,15 +1,11 @@
-/* .App {
-  text-align: center;
-
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+/* html {
+  background-color: beige;
 } */
 .backgroundImage {
   position: absolute;
   left: 0;
   right: 0;
+  bottom: 0;
   z-index: -1;
   display: block;
   background-image: url("/src/background.png");
@@ -26,6 +22,29 @@
   background-color: black;
   filter: brightness(35%);
   animation: fadein 2s;
+}
+
+.backgroundPages {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  display: block;
+  background-image: url("/src/bolsa.png");
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(0px);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  width: 100%;
+  background-color: black;
+  filter: brightness(35%);
+  animation: fadein 2s;
+  background-attachment: fixed;
 }
 
 @-webkit-keyframes fadein {
@@ -78,7 +97,10 @@
   animation: mymove 2.5s;
 }
 .animation {
-  animation: mymove 2s;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  z-index: 2;
 }
 
 button:hover {
@@ -97,13 +119,75 @@ button:hover {
   }
 }
 
-.title {
+.BeTitle {
+  font-family: "Montserrat", sans-serif;
+}
+
+.homePage-title {
+  font-size: 70px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  text-shadow: 0px 0px 5px white;
+  color: white;
   font-family: "Montserrat extra-bold", sans-serif;
   text-align: center;
 
   vertical-align: middle;
 }
+#homePage-h3 {
+  font-size: 30px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  vertical-align: center;
+  color: white;
+}
 
-.BeTitle {
-  font-family: "Montserrat", sans-serif;
+.homePage-card {
+  padding: 30px;
+  background-color: #fffbec;
+  width: 350px;
+  height: 350px;
+  align-content: center;
+}
+
+.card-images {
+  border-style: solid;
+
+  width: 100%;
+  border-radius: 5px;
+  height: 180px;
+  object-fit: cover;
+}
+
+.homePage-cardComponent {
+  padding: 30px;
+  margin-top: 300px;
+  background-color: hsla(0, 0%, 0%, 0.3);
+}
+
+.vouchersCardTitle {
+  font-size: 25;
+  padding-top: 50px;
+  color: white;
+  font-family: "Montserrat extra-bold", sans-serif;
+}
+
+.boldTitle {
+  text-shadow: 0px 0px 5px white;
+}
+
+.QRform {
+  justify-content: center;
+  /* margin-top: 40px; */
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+label {
+  color: white;
 }
