@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-
+import { Container } from "react-bootstrap";
 import axios from "axios";
 import {
   BarChart,
@@ -45,29 +45,30 @@ export default function StoreStats() {
         }}
       >
         <h1 className="vouchersCardTitle">Your sales per day:</h1>
-
-        <BarChart
-          width={500}
-          height={300}
-          data={myStats}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-          style={{
-            backgroundColor: "#eee7e1",
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="sold" stackId="a" fill="#8884d8" />
-          <Bar dataKey="free" stackId="a" fill="#82ca9d" />
-        </BarChart>
+        <Container fluid>
+          <BarChart
+            width={500}
+            height={300}
+            data={myStats}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+            style={{
+              backgroundColor: "#eee7e1",
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="sold" stackId="a" fill="#8884d8" />
+            <Bar dataKey="free" stackId="a" fill="#82ca9d" />
+          </BarChart>
+        </Container>
       </div>
     </div>
   );

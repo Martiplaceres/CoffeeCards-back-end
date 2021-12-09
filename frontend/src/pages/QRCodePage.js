@@ -37,7 +37,7 @@ export default function QRCodePage() {
         <div className="QRform">
           <label for="beans">Coffee bean:</label>
           <select
-            style={{ width: "50%" }}
+            style={{ width: "30%" }}
             value={bean}
             onChange={(e) => setBean(e.target.value)}
             name="beans"
@@ -53,7 +53,7 @@ export default function QRCodePage() {
 
           <label for="quantity">Quantity (between 1 and 5):</label>
           <input
-            style={{ width: "50%" }}
+            style={{ width: "30%" }}
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
             type="number"

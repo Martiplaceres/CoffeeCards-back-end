@@ -20,26 +20,35 @@ export default function BeanDetails(props) {
   return (
     <div>
       <div className="backgroundPages"></div>
-      <div className="animation" style={{ textAlign: "center", marginTop: 50 }}>
+      <div
+        className="animation"
+        style={{ textAlign: "center", color: "white", paddingTop: 50 }}
+      >
         <h1 style={{ fontSize: 25 }}>
           All you need to know about beans from:{" "}
         </h1>
         <div key={bean.id}>
-          <h2
-            style={{
-              fontSize: 45,
-              fontFamily: "lobster",
-              marginTop: 50,
-              fontWeight: "bold",
-            }}
-          >
+          <h2 className="boldTitle" style={{ fontSize: "60px" }}>
             {bean.name}
           </h2>
-          <h3 style={{ fontSize: 20, fontWeight: "bold", marginTop: 30 }}>
+          <h3
+            style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              color: "white",
+              marginTop: 40,
+            }}
+          >
             {" "}
             {bean.facts}{" "}
           </h3>
-          {bean.history}
+          <div
+            style={{
+              padding: 40,
+            }}
+          >
+            {bean.history}
+          </div>
         </div>
       </div>
     </div>

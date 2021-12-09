@@ -46,9 +46,15 @@ export default function ScanVoucherPage() {
   return (
     <div>
       <div className="backgroundPages"></div>
-      <div className="animation">
+      <div className="animation" style={{ paddingTop: "30px" }}>
         {errorMessage === null && claimedVoucher !== null ? (
-          <div style={{ marginTop: 20 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
             <Card className="card" style={{ width: "18rem" }}>
               <Card.Body>
                 <Card.Title>
@@ -60,7 +66,7 @@ export default function ScanVoucherPage() {
             </Card>
           </div>
         ) : (
-          <h2>{errorMessage}</h2>
+          <h2 class="boldTitle">{errorMessage}</h2>
         )}
       </div>
     </div>

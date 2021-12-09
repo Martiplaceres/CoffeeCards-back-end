@@ -42,10 +42,10 @@ export default function CardDetailsPage() {
           flexDirection: "column",
           textAlign: "center",
           alignItems: "center",
-          marginTop: 50,
+          paddingTop: 50,
         }}
       >
-        <h1 style={{ fontSize: 30, marginTop: 30, marginBottom: 25 }}>
+        <h1 className="boldTitle" style={{ color: "white" }}>
           {" "}
           Enjoy your coffee!
         </h1>
@@ -67,12 +67,15 @@ export default function CardDetailsPage() {
               textAlign: "center",
               marginTop: 10,
               fontSize: 20,
+              color: "white",
             }}
           >
             {user.name}, you need {myCard.stampLimit - myCard.currentStamps}{" "}
             more stamps to get a voucher.
           </h3>
-          <p>Are you curious about which beans are we using?</p>
+          <p style={{ color: "white" }}>
+            Are you curious about which beans are we using?
+          </p>
           <button type="button" class="btn btn-dark">
             <Link
               to={`/beans/${myCard.lastBean.id}`}
