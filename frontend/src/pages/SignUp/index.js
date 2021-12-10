@@ -81,6 +81,7 @@ export default function SignUp() {
             value={isStore}
             onChange={(event) => setIsStore(!isStore)}
           />
+          Sign up as a store
         </Form.Group>
         {isStore && (
           <Form.Group>
